@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ch.frenchguy.dd5tools">
+    package="ch.yannickmauray.dd5tools">
    <application
         android:label="dd5tools"
         android:name="${applicationName}"

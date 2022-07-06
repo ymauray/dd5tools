@@ -10,33 +10,40 @@ class AppTheme {
       titleTextStyle: const TextTheme(
         headline6: TextStyle(
           color: Colors.white,
-          fontSize: 20,
+          //fontSize: 20,
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
           fontFamily: 'Mr Eaves Small Caps (Remake)',
         ),
       ).headline6,
     ),
     textTheme: const TextTheme(
       bodyMedium: TextStyle(
-        fontSize: 16,
+        //fontSize: 16,
+        fontSize: 20,
         fontFamily: 'Bookinsanity (Remake)',
       ),
       labelLarge: TextStyle(
-        fontSize: 20,
+        //fontSize: 20,
+        fontSize: 25,
         fontFamily: 'Mr Eaves Small Caps (Remake)',
         color: Colors.white,
       ),
       titleLarge: TextStyle(
-        fontSize: 25,
+        //fontSize: 25,
+        fontSize: 30,
         fontFamily: 'Mr Eaves Small Caps (Remake)',
         fontWeight: FontWeight.bold,
       ),
       titleMedium: TextStyle(
-        fontSize: 20,
+        //fontSize: 20,
+        fontSize: 25,
         fontFamily: 'Mr Eaves Small Caps (Remake)',
         fontWeight: FontWeight.bold,
       ),
       titleSmall: TextStyle(
-        fontSize: 16,
+        //fontSize: 16,
+        fontSize: 20,
         fontFamily: 'Mr Eaves Small Caps (Remake)',
         fontWeight: FontWeight.bold,
       ),

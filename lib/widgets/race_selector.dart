@@ -1,16 +1,19 @@
-import 'package:dd5tools/models/race.dart';
-import 'package:dd5tools/widgets/title_large.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/race_card.dart';
+import '../models/race.dart';
+import 'race_card.dart';
+import 'title_large.dart';
 
-class ChooseRace extends StatelessWidget {
-  const ChooseRace({Key? key}) : super(key: key);
+class RaceSelector extends StatelessWidget {
+  const RaceSelector({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Race'),
       ),
       body: ListView.builder(

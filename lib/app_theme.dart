@@ -35,6 +35,11 @@ class AppTheme {
         fontFamily: 'Mr Eaves Small Caps (Remake)',
         fontWeight: FontWeight.bold,
       ),
+      titleSmall: TextStyle(
+        fontSize: 16,
+        fontFamily: 'Mr Eaves Small Caps (Remake)',
+        fontWeight: FontWeight.bold,
+      ),
     ),
   );
 }

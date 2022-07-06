@@ -1,23 +1,53 @@
-class Race {
+import 'dwarf.dart';
+import 'trait.dart';
+
+abstract class Race {
   static var list = [
-    const Race('Haut-elfe'),
-    const Race('Elfe des bois'),
-    const Race('Elfe noir'),
-    const Race('Halfelin pied-léger'),
-    const Race('Halfelin robuste'),
-    const Race('Humain'),
-    const Race('Nain des collines'),
-    const Race('Nain des montagnes', enabled: true),
-    const Race('Demi-elfe'),
-    const Race('Demi-orc'),
-    const Race('Drakéide'),
-    const Race('Gnome des forêts'),
-    const Race('Gnome des roches'),
-    const Race('Tieffelin'),
+    const RaceImpl('Haut-elfe'),
+    const RaceImpl('Elfe des bois'),
+    const RaceImpl('Elfe noir'),
+    const RaceImpl('Halfelin pied-léger'),
+    const RaceImpl('Halfelin robuste'),
+    const RaceImpl('Humain'),
+    const RaceImpl('Nain des collines'),
+    const NainDesMontagnes(),
+    const RaceImpl('Demi-elfe'),
+    const RaceImpl('Demi-orc'),
+    const RaceImpl('Drakéide'),
+    const RaceImpl('Gnome des forêts'),
+    const RaceImpl('Gnome des roches'),
+    const RaceImpl('Tieffelin'),
   ];
 
   const Race(this.name, {this.enabled = false});
 
+  String get description;
+  List<AbilityScoreIncrease> get increases => [];
+  Size get size;
+  Speed get speed;
+  Vision? get vision => null;
+  List<Language> get languages;
+  List<Trait> get traits;
+
   final String name;
   final bool enabled;
+}
+
+class RaceImpl extends Race {
+  const RaceImpl(String name) : super(name, enabled: false);
+
+  @override
+  get description => '';
+
+  @override
+  get size => const Size("S", 0.0, 0.0);
+
+  @override
+  get speed => Speed(0.0);
+
+  @override
+  get languages => [];
+
+  @override
+  get traits => <Trait>[];
 }

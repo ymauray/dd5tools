@@ -47,6 +47,7 @@ class HomePage extends StatelessWidget {
             BottomButton(
               label: 'Ajouter un personnage',
               onPressed: () async {
+                cubit.newCharacter();
                 final character = await Navigator.of(context)
                     .pushNamed<Character?>('build_character');
                 // ignore: no-empty-block

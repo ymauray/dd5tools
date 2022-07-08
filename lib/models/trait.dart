@@ -2,18 +2,19 @@ class Trait {
   const Trait(
     String label,
     String description, {
-    bool needsChoices = false,
+    List<String>? choices,
   })  : _label = label,
         _description = description,
-        _needsChoices = needsChoices;
+        _choices = choices;
 
   final String _label;
   final String _description;
-  final bool _needsChoices;
+  final List<String>? _choices;
 
-  get label => _label;
-  get description => _description;
-  get needsChoices => _needsChoices;
+  String get label => _label;
+  String get description => _description;
+  bool get needsChoices => _choices != null && _choices!.isNotEmpty;
+  List<String> get choices => _choices ?? [];
 }
 
 class Ability {
@@ -53,9 +54,9 @@ class Size {
   final double _min;
   final double _max;
 
-  get label => _label;
-  get min => _min;
-  get max => _max;
+  String get label => _label;
+  double get min => _min;
+  double get max => _max;
 }
 
 class Speed {
@@ -63,7 +64,7 @@ class Speed {
 
   final double _value;
 
-  get value => _value;
+  double get value => _value;
 }
 
 class Vision {
@@ -74,8 +75,8 @@ class Vision {
   final String _value;
   final String _description;
 
-  get value => _value;
-  get description => _description;
+  String get value => _value;
+  String get description => _description;
 }
 
 class Language {
@@ -83,5 +84,5 @@ class Language {
 
   final String _value;
 
-  get value => _value;
+  String get value => _value;
 }

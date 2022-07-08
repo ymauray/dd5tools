@@ -50,7 +50,11 @@ abstract class Nain extends Race {
           "Maîtrise des outils",
           "Vous obtenez la maîtrise d'un des outils d'artisan suivant au choix "
               ": outils de forgeron, outils de brasseur ou outils de maçon.",
-          needsChoices: true,
+          choices: [
+            "Outils de forgeron",
+            "Outils de brasseur",
+            "Outils de maçon",
+          ],
         ),
         const Trait(
           "Connaissance de la pierre",

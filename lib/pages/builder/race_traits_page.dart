@@ -74,6 +74,45 @@ class RaceTraitsPage extends StatelessWidget {
                         title: trait.label,
                         children: [
                           Text(trait.description),
+                          if (trait.needsChoices)
+                            DropdownButtonFormField<String>(
+                              style: Theme.of(context).textTheme.bodySmall,
+                              value: "",
+                              items: [
+                                const DropdownMenuItem<String>(
+                                  value: "",
+                                  child: Text("-- Choisissez une option --"),
+                                ),
+                                ...trait.choices
+                                    .map(
+                                      (choice) => DropdownMenuItem<String>(
+                                        value: choice,
+                                        child: Text(choice),
+                                      ),
+                                    )
+                                    .toList(),
+                              ],
+                              onChanged: (value) {},
+                            ),
+                          /*
+                          if (trait.needsChoices) ...[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Choisissez une des options suivantes :",
+                                style: Theme.of(context).textTheme.caption,
+                              ),
+                            ),
+                            ...trait.choices.map(
+                              (choice) => Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  choice,
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
+                              ),
+                            ),
+                          ],*/
                         ],
                       ),
                     ),

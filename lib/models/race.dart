@@ -19,7 +19,15 @@ abstract class Race {
     const RaceImpl('Tieffelin'),
   ];
 
-  const Race(this.name, {this.enabled = false});
+  const Race(String name, {bool enabled = false})
+      : _name = name,
+        _enabled = enabled;
+
+  final String _name;
+  final bool _enabled;
+
+  String get name => _name;
+  bool get enabled => _enabled;
 
   String get description;
   List<AbilityScoreIncrease> get increases => [];
@@ -28,26 +36,23 @@ abstract class Race {
   Vision? get vision => null;
   List<Language> get languages;
   List<Trait> get traits;
-
-  final String name;
-  final bool enabled;
 }
 
 class RaceImpl extends Race {
   const RaceImpl(String name) : super(name, enabled: false);
 
   @override
-  get description => '';
+  String get description => '';
 
   @override
-  get size => const Size("S", 0.0, 0.0);
+  Size get size => const Size("S", 0.0, 0.0);
 
   @override
-  get speed => Speed(0.0);
+  Speed get speed => Speed(0.0);
 
   @override
-  get languages => [];
+  List<Language> get languages => [];
 
   @override
-  get traits => <Trait>[];
+  List<Trait> get traits => <Trait>[];
 }

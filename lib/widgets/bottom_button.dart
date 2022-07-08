@@ -18,7 +18,7 @@ class BottomButton extends StatelessWidget {
           thickness: 1,
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
+          padding: const EdgeInsets.only(bottom: 24.0),
           child: ElevatedButton(
             onPressed: _onPressed,
             child: Padding(

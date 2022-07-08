@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Collapsible extends StatefulWidget {
   const Collapsible({
     required title,
-    required List<Text> children,
+    required List<Widget> children,
     bool badge = false,
     Key? key,
   })  : _title = title,

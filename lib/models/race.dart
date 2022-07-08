@@ -1,4 +1,4 @@
-import 'dwarf.dart';
+import 'races/dwarf.dart';
 import 'trait.dart';
 
 abstract class Race {

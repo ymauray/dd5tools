@@ -1,3 +1,4 @@
+import 'package:dd5tools/models/character_class.dart';
 import 'package:dd5tools/models/race.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,4 +18,7 @@ class CharacterBuilderCubit extends Cubit<CharacterBuilderState> {
     this.race = race;
     emit(CharacterBuilderRaceSelected());
   }
+
+  // ignore: no-empty-block
+  void selectClass(CharacterClass characterClass) {}
 }

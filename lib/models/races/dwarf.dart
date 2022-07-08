@@ -1,5 +1,5 @@
-import 'race.dart';
-import 'trait.dart';
+import '../race.dart';
+import '../trait.dart';
 
 abstract class Nain extends Race {
   const Nain(String name) : super(name, enabled: true);
@@ -62,8 +62,9 @@ class NainDesMontagnes extends Nain {
       "${super.description}\n\nEn tant que nain des montagnes, vous êtes fort "
       "et robuste, et habitué à une vie difficile en terrain accidenté. Vous "
       "êtes probablement plus grand que la moyenne (pour un nain) et votre "
-      "peau est plus claire. Les nains d'écu au nord de Faerûn sont des nains "
-      "des montagnes.";
+      "peau est plus claire. Les nains d'écu du nord de Féérune, ainsi que le "
+      "clan régnant des Hylar et le noble clan des Daewar de Dragonlance sont "
+      "tous des nains des montagnes.";
 
   @override
   get increases => [

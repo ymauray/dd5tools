@@ -3,6 +3,9 @@ import 'package:dd5tools/widgets/title_large.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/character.dart';
+import '../widgets/paper_container.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -10,47 +13,70 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<CharacterBuilderCubit>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('DD5Tools'),
       ),
-      body: ListView.builder(
-        itemCount: fakeCount + 2,
-        itemBuilder: (BuildContext context, int index) {
-          if (index == 0) {
-            return Padding(
+      body: PaperContainer(
+        child: Column(
+          children: [
+            Padding(
               padding: const EdgeInsets.all(16.0).copyWith(bottom: 0),
               child: const TitleLarge('Mes personnages'),
-            );
-          } else if (index == fakeCount + 1) {
-            final cubit = context.read<CharacterBuilderCubit>();
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: fakeCount,
+                itemBuilder: (BuildContext context, int index) {
+                  return const Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                    child: Card(
+                      child: ListTile(
+                        title: Text('Personnage'),
+                        subtitle: Text('Description'),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Column(
               children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    await Navigator.of(context).pushNamed('build_character');
-                    cubit.init();
-                  },
-                  child: Text(
-                    'Ajouter un personnage',
-                    style: Theme.of(context).textTheme.labelLarge,
+                Divider(
+                  color: Colors.red.shade900,
+                  thickness: 1,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final character = await Navigator.of(context)
+                          .pushNamed<Character?>('build_character');
+                      // ignore: no-empty-block
+                      if (character != null) {
+                        /* Do something clever */
+                      }
+                      cubit.init();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'Ajouter un personnage',
+                        style:
+                            Theme.of(context).textTheme.titleMedium!.copyWith(
+                                  color: Colors.white,
+                                ),
+                      ),
+                    ),
                   ),
                 ),
               ],
-            );
-          } else {
-            return const Padding(
-              padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-              child: Card(
-                child: ListTile(
-                  title: Text('Personnage'),
-                  subtitle: Text('Description'),
-                ),
-              ),
-            );
-          }
-        },
+            ),
+          ],
+        ),
       ),
     );
   }

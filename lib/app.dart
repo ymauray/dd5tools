@@ -1,10 +1,11 @@
 import 'package:dd5tools/cubit/character_builder_cubit.dart';
-import 'package:dd5tools/pages/character_builder.dart';
+import 'package:dd5tools/pages/character_builder_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'app_theme.dart';
+import 'models/character.dart';
 import 'pages/home_page.dart';
 
 class App extends StatelessWidget {
@@ -24,7 +25,15 @@ class App extends StatelessWidget {
         theme: AppTheme.themeData,
         routes: {
           'home': (context) => const HomePage(),
-          'build_character': (context) => const CharacterBuilder(),
+        },
+        onGenerateRoute: (settings) {
+          if (settings.name == 'build_character') {
+            return MaterialPageRoute<Character>(
+              builder: (context) => const CharacterBuilderPage(),
+            );
+          }
+
+          return null;
         },
         initialRoute: 'home',
       ),

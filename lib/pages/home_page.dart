@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/character.dart';
+import '../widgets/bottom_button.dart';
 import '../widgets/paper_container.dart';
 
 class HomePage extends StatelessWidget {
@@ -43,37 +44,17 @@ class HomePage extends StatelessWidget {
                 },
               ),
             ),
-            Column(
-              children: [
-                Divider(
-                  color: Colors.red.shade900,
-                  thickness: 1,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      final character = await Navigator.of(context)
-                          .pushNamed<Character?>('build_character');
-                      // ignore: no-empty-block
-                      if (character != null) {
-                        /* Do something clever */
-                      }
-                      cubit.init();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        'Ajouter un personnage',
-                        style:
-                            Theme.of(context).textTheme.titleMedium!.copyWith(
-                                  color: Colors.white,
-                                ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            BottomButton(
+              label: 'Ajouter un personnage',
+              onPressed: () async {
+                final character = await Navigator.of(context)
+                    .pushNamed<Character?>('build_character');
+                // ignore: no-empty-block
+                if (character != null) {
+                  /* Do something clever */
+                }
+                //cubit.init();
+              },
             ),
           ],
         ),

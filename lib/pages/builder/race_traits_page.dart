@@ -1,8 +1,11 @@
 import 'package:dd5tools/cubit/character_builder_cubit.dart';
-import 'package:dd5tools/widgets/app_scroll_view.dart';
-import 'package:dd5tools/widgets/title_large.dart';
+import 'package:dd5tools/widgets/paper_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../widgets/bottom_button.dart';
+import '../../widgets/collapsible.dart';
+import '../../widgets/title_large.dart';
 
 class RaceTraitsPage extends StatelessWidget {
   const RaceTraitsPage({Key? key}) : super(key: key);
@@ -22,83 +25,148 @@ class RaceTraitsPage extends StatelessWidget {
         ),
         title: const Text('Traits de la race'),
       ),
-      body: AppScrollView(
-        children: [
-          TitleLarge(
-            race.name,
-          ),
-          Text(
-            race.description,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          if (race.increases.isNotEmpty)
-            Section(
-              title: "Augmentation de caractéristiques",
-              children: [
-                Text(
-                  race.increases
-                      .map(
-                        (increase) =>
-                            "${increase.ability.name}: +${increase.increase}",
-                      )
-                      .toList()
-                      .join(", "),
-                ),
-              ],
-            ),
-          Section(
-            title: "Taille",
-            inline: true,
-            children: [
-              Text(race.size.label),
-            ],
-          ),
-          Section(
-            title: "Vitesse",
-            inline: true,
-            children: [Text("${race.speed.value} m / round")],
-          ),
-          if (race.vision != null)
-            Section(
-              title: "Vision",
-              inline: true,
-              children: [Text(race.vision!.value)],
-            ),
-          Section(
-            title: "Langues",
-            inline: true,
-            children: [
-              Text(
-                race.languages
-                    .map((language) => language.value)
-                    .toList()
-                    .join(", "),
+      body: PaperContainer(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0).copyWith(bottom: 8.0),
+              child: TitleLarge(
+                race.name,
               ),
-            ],
-          ),
-          Section(
-            title: "Traits",
-            children: race.traits
-                .map((trait) => Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+            Expanded(
+              child: ListView(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0).copyWith(top: 0.0),
+                    child: Text(
+                      race.description,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                  if (race.vision != null)
+                    Padding(
+                      padding: const EdgeInsets.all(16.0).copyWith(top: 0.0),
+                      child: Collapsible(
+                        title: race.vision!.value,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: Text(
-                              trait.label,
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                          ),
+                          Text(race.vision!.description),
+                        ],
+                      ),
+                    ),
+                  //Section(
+                  //  title: "Langues",
+                  //  inline: true,
+                  //  children: [
+                  //    Text(
+                  //      race.languages
+                  //          .map((language) => language.value)
+                  //          .toList()
+                  //          .join(", "),
+                  //    ),
+                  //  ],
+                  //),
+                  ...race.traits.map(
+                    (trait) => Padding(
+                      padding: const EdgeInsets.all(16.0).copyWith(top: 0.0),
+                      child: Collapsible(
+                        badge: trait.needsChoices,
+                        title: trait.label,
+                        children: [
                           Text(trait.description),
                         ],
                       ),
-                    ))
-                .toList(),
-          ),
-        ],
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+
+                  // ignore: no-empty-block
+                  BottomButton(
+                    label: 'Suivant',
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
+      //body: AppScrollView(
+      //  children: [
+      //    //if (race.increases.isNotEmpty)
+      //    //  Section(
+      //    //    title: "Augmentation de caractéristiques",
+      //    //    children: [
+      //    //      Text(
+      //    //        race.increases
+      //    //            .map(
+      //    //              (increase) =>
+      //    //                  "${increase.ability.name}: +${increase.increase}",
+      //    //            )
+      //    //            .toList()
+      //    //            .join(", "),
+      //    //      ),
+      //    //    ],
+      //    //  ),
+      //    //Section(
+      //    //  title: "Taille",
+      //    //  inline: true,
+      //    //  children: [
+      //    //    Text(race.size.label),
+      //    //  ],
+      //    //),
+      //    //Section(
+      //    //  title: "Vitesse",
+      //    //  inline: true,
+      //    //  children: [Text("${race.speed.value} m / round")],
+      //    //),
+      //    if (race.vision != null)
+      //      Collapsible(
+      //        title: race.vision!.value,
+      //        children: [
+      //          Text(race.vision!.description),
+      //        ],
+      //      ),
+      //    //Section(
+      //    //  title: "Vision",
+      //    //  inline: true,
+      //    //  children: [Text(race.vision!.value)],
+      //    //),
+      //    Section(
+      //      title: "Langues",
+      //      inline: true,
+      //      children: [
+      //        Text(
+      //          race.languages
+      //              .map((language) => language.value)
+      //              .toList()
+      //              .join(", "),
+      //        ),
+      //      ],
+      //    ),
+      //    Section(
+      //      title: "Traits",
+      //      children: race.traits
+      //          .map((trait) => Padding(
+      //                padding: const EdgeInsets.only(bottom: 8.0),
+      //                child: Column(
+      //                  crossAxisAlignment: CrossAxisAlignment.start,
+      //                  children: [
+      //                    Padding(
+      //                      padding: const EdgeInsets.only(bottom: 8.0),
+      //                      child: Text(
+      //                        trait.label,
+      //                        style: Theme.of(context).textTheme.titleSmall,
+      //                      ),
+      //                    ),
+      //                    Text(trait.description),
+      //                  ],
+      //                ),
+      //              ))
+      //          .toList(),
+      //    ),
+      //  ],
+      //),
     );
   }
 }

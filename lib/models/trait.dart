@@ -1,13 +1,19 @@
 class Trait {
-  const Trait(String label, String description)
-      : _label = label,
-        _description = description;
+  const Trait(
+    String label,
+    String description, {
+    bool needsChoices = false,
+  })  : _label = label,
+        _description = description,
+        _needsChoices = needsChoices;
 
   final String _label;
   final String _description;
+  final bool _needsChoices;
 
   get label => _label;
   get description => _description;
+  get needsChoices => _needsChoices;
 }
 
 class Ability {
@@ -61,11 +67,15 @@ class Speed {
 }
 
 class Vision {
-  Vision(String value) : _value = value;
+  Vision(String value, String description)
+      : _value = value,
+        _description = description;
 
   final String _value;
+  final String _description;
 
   get value => _value;
+  get description => _description;
 }
 
 class Language {

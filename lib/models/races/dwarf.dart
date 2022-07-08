@@ -21,7 +21,15 @@ abstract class Nain extends Race {
   get speed => Speed(7.50);
 
   @override
-  get vision => Vision("Vision dans le noir (18m)");
+  get vision => Vision(
+        "Vision dans le noir",
+        "Habitué à la vie souterraine, vous avez une vision supérieure dans "
+            "l'obscurité et la lumière faible. Vous pouvez voir à 18 mètres "
+            "dans une zone de lumière faible comme vous verriez avec une "
+            "lumière vive, et dans le noir comme vous verriez avec une lumière "
+            "faible. Dans le noir, vous ne discernez pas les couleurs, "
+            "uniquement des nuances de gris.",
+      );
 
   @override
   get languages => [Language("Commun"), Language("Nain")];
@@ -42,6 +50,7 @@ abstract class Nain extends Race {
           "Maîtrise des outils",
           "Vous obtenez la maîtrise d'un des outils d'artisan suivant au choix "
               ": outils de forgeron, outils de brasseur ou outils de maçon.",
+          needsChoices: true,
         ),
         const Trait(
           "Connaissance de la pierre",

@@ -14,8 +14,7 @@ class PaperContainer extends StatelessWidget {
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage("assets/paper_bg.png"),
-          repeat: ImageRepeat.repeatY,
-          fit: BoxFit.fitWidth,
+          repeat: ImageRepeat.repeat,
         ),
       ),
       child: child,

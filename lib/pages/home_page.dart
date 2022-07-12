@@ -1,64 +1,68 @@
-import 'package:dd5tools/cubit/character_builder_cubit.dart';
-import 'package:dd5tools/widgets/title_large.dart';
+import 'package:dd5tools/widgets/paper_container.dart';
+import 'package:dd5tools/widgets/typography/body_small.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/character.dart';
-import '../widgets/bottom_button.dart';
-import '../widgets/paper_container.dart';
+import '../models/characer.dart';
+import '../widgets/typography/title_medium.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  final int fakeCount = 0;
-
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<CharacterBuilderCubit>();
+    final characters = context.read<List<Character>>();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('DD5Tools'),
+        title: const Text('Mes personnages'),
+        centerTitle: true,
       ),
       body: PaperContainer(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0).copyWith(bottom: 0),
-              child: const TitleLarge('Mes personnages'),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: fakeCount,
-                itemBuilder: (BuildContext context, int index) {
-                  return const Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-                    child: Card(
-                      child: ListTile(
-                        title: Text('Personnage'),
-                        subtitle: Text('Description'),
-                      ),
-                    ),
-                  );
-                },
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+              ).copyWith(
+                top: 8.0,
+                bottom: 0.0,
               ),
-            ),
-            BottomButton(
-              label: 'Ajouter un personnage',
-              onPressed: () async {
-                cubit.newCharacter();
-                final character = await Navigator.of(context)
-                    .pushNamed<Character?>('build_character');
-                // ignore: no-empty-block
-                if (character != null) {
-                  /* Do something clever */
-                }
-                //cubit.init();
-              },
-            ),
-          ],
+              child: CharacterCard(characters[index]),
+            );
+          },
+          itemCount: characters.length,
         ),
+      ),
+    );
+  }
+}
+
+class CharacterCard extends StatelessWidget {
+  const CharacterCard(Character character, {Key? key})
+      : _character = character,
+        super(key: key);
+
+  final Character _character;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFFBBBBBB),
+        backgroundBlendMode: BlendMode.colorBurn,
+        border: Border.all(
+          color: const Color(0xFFc9ad6a),
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      child: ListTile(
+        title: TitleMedium(_character.name),
+        subtitle: BodySmall(_character.tagline ?? ''),
+        onTap: () {
+          debugPrint("Hello, ${_character.name}");
+        },
       ),
     );
   }

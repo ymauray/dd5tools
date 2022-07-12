@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 
 class TitleLarge extends StatelessWidget {
-  const TitleLarge(
-    this.label, {
-    Key? key,
-  }) : super(key: key);
+  const TitleLarge(String data, {Key? key})
+      : _data = data,
+        super(key: key);
 
-  final String label;
+  final String _data;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: Theme.of(context).textTheme.titleLarge),
-        const Divider(
-          color: Colors.red,
-          thickness: 1,
+        Text(
+          _data,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
       ],
     );

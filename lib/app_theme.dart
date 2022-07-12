@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
+  //static const _fontScale = 1.25;
   static const _fontScale = 1.25;
+  static const _fontScaleCM = 35 * _fontScale;
 
   static var themeData = ThemeData(
     primarySwatch: Colors.red,
@@ -9,6 +11,12 @@ class AppTheme {
     appBarTheme: const AppBarTheme(
       color: Colors.red,
       elevation: 0,
+      foregroundColor: Colors.white,
+      titleTextStyle: TextStyle(
+        fontSize: .705 * _fontScaleCM,
+        fontFamily: 'Mr Eaves Small Caps (Remake)',
+        fontWeight: FontWeight.normal,
+      ),
     ),
 
     /**
@@ -65,21 +73,22 @@ class AppTheme {
        */
 
       titleLarge: TextStyle(
-        fontSize: 22 * _fontScale,
+        fontSize: .987 * _fontScaleCM,
         fontFamily: 'Mr Eaves Small Caps (Remake)',
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w800,
+        color: Color(0xFF58180D),
       ),
       titleMedium: TextStyle(
-        //fontSize: 20,
-        fontSize: 16 * _fontScale,
+        fontSize: .705 * _fontScaleCM,
         fontFamily: 'Mr Eaves Small Caps (Remake)',
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w800,
+        color: Color(0xFF58180D),
       ),
       titleSmall: TextStyle(
-        //fontSize: 16,
-        fontSize: 14 * _fontScale,
+        fontSize: .529 * _fontScaleCM,
         fontFamily: 'Mr Eaves Small Caps (Remake)',
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w800,
+        color: Color(0xFF58180D),
       ),
 
       /**
@@ -127,9 +136,10 @@ class AppTheme {
         fontFamily: 'Bookinsanity (Remake)',
       ),
       bodySmall: TextStyle(
-        fontSize: 12 * _fontScale,
+        fontSize: .317 * _fontScaleCM,
         fontWeight: FontWeight.w400,
         fontFamily: 'Bookinsanity (Remake)',
+        color: Color(0xff222222),
       ),
     ),
   );

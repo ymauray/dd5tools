@@ -15,6 +15,7 @@ class TitleSmall extends StatelessWidget {
       padding: _padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             _data,

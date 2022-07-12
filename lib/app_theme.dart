@@ -18,7 +18,18 @@ class AppTheme {
         fontWeight: FontWeight.normal,
       ),
     ),
-
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all(Colors.black),
+        textStyle: MaterialStateProperty.all(
+          const TextStyle(
+            fontSize: 12 * _fontScale,
+            fontWeight: FontWeight.w400,
+            fontFamily: 'Bookinsanity (Remake)',
+          ),
+        ),
+      ),
+    ),
     /**
      * See https://m3.material.io/styles/typography/type-scale-tokens
      */

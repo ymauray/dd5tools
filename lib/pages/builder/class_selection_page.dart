@@ -1,18 +1,25 @@
 import 'package:dd5tools/widgets/title_large.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../models/character_class.dart';
-import 'character_class_card.dart';
-import 'paper_container.dart';
+import '../../cubit/character_builder_cubit.dart';
+import '../../models/character_class.dart';
+import '../../widgets/character_class_card.dart';
+import '../../widgets/paper_container.dart';
 
-class CharacterClassSelector extends StatelessWidget {
-  const CharacterClassSelector({Key? key}) : super(key: key);
+class ClassSelectionPage extends StatelessWidget {
+  const ClassSelectionPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            context.read<CharacterBuilderCubit>().displayRaceTraits();
+          },
+        ),
         title: const Text('Classe'),
       ),
       body: PaperContainer(

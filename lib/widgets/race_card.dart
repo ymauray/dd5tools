@@ -1,7 +1,7 @@
-import 'package:dd5tools/cubit/character_builder_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../cubit/character_builder_cubit.dart';
 import '../models/race.dart';
 
 class RaceCard extends StatelessWidget {
@@ -24,9 +24,6 @@ class RaceCard extends StatelessWidget {
           enabled: race.enabled,
           title: Text(race.name),
           onTap: () {
-            //Navigator.of(context).pushNamed(
-            //  "confirm_race",
-            //);
             context.read<CharacterBuilderCubit>().selectRace(race);
           },
         ),

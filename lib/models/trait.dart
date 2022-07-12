@@ -1,19 +1,20 @@
 class Trait {
-  const Trait(
+  Trait(
     String label,
     String description, {
     List<String>? choices,
   })  : _label = label,
         _description = description,
-        _choices = choices;
+        _choices = choices,
+        needsChoices = choices != null && choices.isNotEmpty;
 
   final String _label;
   final String _description;
+  bool needsChoices;
   final List<String>? _choices;
 
   String get label => _label;
   String get description => _description;
-  bool get needsChoices => _choices != null && _choices!.isNotEmpty;
   List<String> get choices => _choices ?? [];
 }
 

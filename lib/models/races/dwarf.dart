@@ -36,17 +36,17 @@ abstract class Nain extends Race {
 
   @override
   get traits => [
-        const Trait(
+        Trait(
           "Résistance naine",
           "Vous avez un avantage aux jets de sauvegarde contre le poison et "
               "obtenez la résistance contre les dégâts de poison.",
         ),
-        const Trait(
+        Trait(
           "Entraînement aux armes naines",
           "Vous obtenez la maîtrise des hachettes, des haches d'armes, des "
               "marteaux légers et des marteaux de guerre.",
         ),
-        const Trait(
+        Trait(
           "Maîtrise des outils",
           "Vous obtenez la maîtrise d'un des outils d'artisan suivant au choix "
               ": outils de forgeron, outils de brasseur ou outils de maçon.",
@@ -56,7 +56,7 @@ abstract class Nain extends Race {
             "Outils de maçon",
           ],
         ),
-        const Trait(
+        Trait(
           "Connaissance de la pierre",
           "Chaque fois que vous effectuez un jet d'Intelligence (Histoire) en "
               "relation avec l'origine d'un travail lié à la pierre, "
@@ -88,7 +88,7 @@ class NainDesMontagnes extends Nain {
   @override
   List<Trait> get traits => [
         ...super.traits,
-        const Trait(
+        Trait(
           "Formation au port des armures naines",
           "Vous maîtrisez les armures légères et intermédiaires.",
         ),

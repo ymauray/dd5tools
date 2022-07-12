@@ -8,7 +8,7 @@ import '../models/race.dart';
 part 'character_builder_state.dart';
 
 class CharacterBuilderCubit extends Cubit<CharacterBuilderState> {
-  CharacterBuilderCubit() : super(CharacterBuilderInitial());
+  CharacterBuilderCubit() : super(const RaceSelection());
 
   Character? _character;
 
@@ -19,14 +19,23 @@ class CharacterBuilderCubit extends Cubit<CharacterBuilderState> {
   }
 
   void init() {
-    emit(CharacterBuilderInitial());
+    emit(const RaceSelection());
   }
 
-  void selectRace(race) {
+  void selectRace(Race race) {
     _character!.race = race;
-    emit(CharacterBuilderRaceSelected());
+    emit(const DisplayRaceTraits());
   }
 
-  // ignore: no-empty-block
-  void selectClass(CharacterClass characterClass) {}
+  void displayRaceTraits() {
+    emit(const DisplayRaceTraits());
+  }
+
+  void displayClassSelectionPage() {
+    emit(const ClassSelection());
+  }
+
+  void selectClass(CharacterClass characterClass) {
+    _character!.characterClass = characterClass;
+  }
 }

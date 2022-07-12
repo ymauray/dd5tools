@@ -1,10 +1,10 @@
-import 'package:dd5tools/cubit/character_builder_cubit.dart';
-import 'package:dd5tools/widgets/paper_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../cubit/character_builder_cubit.dart';
 import '../../widgets/bottom_button.dart';
 import '../../widgets/collapsible.dart';
+import '../../widgets/paper_container.dart';
 import '../../widgets/title_large.dart';
 
 class RaceTraitsPage extends StatelessWidget {
@@ -49,9 +49,7 @@ class RaceTraitsPage extends StatelessWidget {
                       padding: const EdgeInsets.all(16.0).copyWith(top: 0.0),
                       child: Collapsible(
                         title: race.vision!.value,
-                        children: [
-                          Text(race.vision!.description),
-                        ],
+                        builder: (context) => Text(race.vision!.description),
                       ),
                     ),
                   //Section(
@@ -70,142 +68,29 @@ class RaceTraitsPage extends StatelessWidget {
                     (trait) => Padding(
                       padding: const EdgeInsets.all(16.0).copyWith(top: 0.0),
                       child: Collapsible(
-                        badge: trait.needsChoices,
                         title: trait.label,
-                        children: [
-                          Text(trait.description),
-                          if (trait.needsChoices)
-                            DropdownButtonFormField<String>(
-                              style: Theme.of(context).textTheme.bodySmall,
-                              value: "",
-                              items: [
-                                const DropdownMenuItem<String>(
-                                  value: "",
-                                  child: Text("-- Choisissez une option --"),
-                                ),
-                                ...trait.choices
-                                    .map(
-                                      (choice) => DropdownMenuItem<String>(
-                                        value: choice,
-                                        child: Text(choice),
-                                      ),
-                                    )
-                                    .toList(),
-                              ],
-                              onChanged: (value) {},
-                            ),
-                          /*
-                          if (trait.needsChoices) ...[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Choisissez une des options suivantes :",
-                                style: Theme.of(context).textTheme.caption,
-                              ),
-                            ),
-                            ...trait.choices.map(
-                              (choice) => Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  choice,
-                                  style: Theme.of(context).textTheme.caption,
-                                ),
-                              ),
-                            ),
-                          ],*/
-                        ],
+                        builder: (context) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(trait.description),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16.0),
-
-                  // ignore: no-empty-block
-                  BottomButton(
-                    label: 'Suivant',
-                    onPressed: () {},
                   ),
                 ],
               ),
             ),
+            // ignore: no-empty-block
+            BottomButton(
+              label: 'Suivant',
+              onPressed: () {
+                cubit.displayClassSelectionPage();
+              },
+            ),
           ],
         ),
       ),
-      //body: AppScrollView(
-      //  children: [
-      //    //if (race.increases.isNotEmpty)
-      //    //  Section(
-      //    //    title: "Augmentation de caractéristiques",
-      //    //    children: [
-      //    //      Text(
-      //    //        race.increases
-      //    //            .map(
-      //    //              (increase) =>
-      //    //                  "${increase.ability.name}: +${increase.increase}",
-      //    //            )
-      //    //            .toList()
-      //    //            .join(", "),
-      //    //      ),
-      //    //    ],
-      //    //  ),
-      //    //Section(
-      //    //  title: "Taille",
-      //    //  inline: true,
-      //    //  children: [
-      //    //    Text(race.size.label),
-      //    //  ],
-      //    //),
-      //    //Section(
-      //    //  title: "Vitesse",
-      //    //  inline: true,
-      //    //  children: [Text("${race.speed.value} m / round")],
-      //    //),
-      //    if (race.vision != null)
-      //      Collapsible(
-      //        title: race.vision!.value,
-      //        children: [
-      //          Text(race.vision!.description),
-      //        ],
-      //      ),
-      //    //Section(
-      //    //  title: "Vision",
-      //    //  inline: true,
-      //    //  children: [Text(race.vision!.value)],
-      //    //),
-      //    Section(
-      //      title: "Langues",
-      //      inline: true,
-      //      children: [
-      //        Text(
-      //          race.languages
-      //              .map((language) => language.value)
-      //              .toList()
-      //              .join(", "),
-      //        ),
-      //      ],
-      //    ),
-      //    Section(
-      //      title: "Traits",
-      //      children: race.traits
-      //          .map((trait) => Padding(
-      //                padding: const EdgeInsets.only(bottom: 8.0),
-      //                child: Column(
-      //                  crossAxisAlignment: CrossAxisAlignment.start,
-      //                  children: [
-      //                    Padding(
-      //                      padding: const EdgeInsets.only(bottom: 8.0),
-      //                      child: Text(
-      //                        trait.label,
-      //                        style: Theme.of(context).textTheme.titleSmall,
-      //                      ),
-      //                    ),
-      //                    Text(trait.description),
-      //                  ],
-      //                ),
-      //              ))
-      //          .toList(),
-      //    ),
-      //  ],
-      //),
     );
   }
 }

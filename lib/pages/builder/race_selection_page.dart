@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../models/character.dart';
 import '../../models/race.dart';
 import '../../widgets/paper_container.dart';
 import '../../widgets/race_card.dart';
@@ -18,10 +17,9 @@ class RaceSelectionPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop<Character?>(null);
+            Navigator.of(context).pop();
           },
         ),
-        //automaticallyImplyLeading: false,
         title: const Text('Race'),
       ),
       body: PaperContainer(

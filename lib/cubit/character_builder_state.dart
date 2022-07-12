@@ -3,6 +3,6 @@ part of 'character_builder_cubit.dart';
 @immutable
 abstract class CharacterBuilderState {}
 
-class CharacterBuilderInitial extends CharacterBuilderState {}
+class RaceSelection extends CharacterBuilderState {}
 
-class CharacterBuilderRaceSelected extends CharacterBuilderState {}
+class ClassSelection extends CharacterBuilderState {}

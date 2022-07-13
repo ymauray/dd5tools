@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dd5tools/providers/character_provider.dart';
 import 'package:dd5tools/widgets/paper_container.dart';
 import 'package:dd5tools/widgets/typography/title_small.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../models/characer.dart';
@@ -89,7 +92,26 @@ class _HomePageState extends State<HomePage> {
                   _Footer(
                     children: [
                       const SizedBox(width: 48),
-                      BodySmall(statusLine),
+                      FutureBuilder<PackageInfo>(
+                        future: PackageInfo.fromPlatform(),
+                        initialData: PackageInfo(
+                          appName: 'Not available',
+                          packageName: 'Not available',
+                          version: '0.0.0',
+                          buildNumber: '0',
+                        ),
+                        builder: (context, snapshot) {
+                          return Column(
+                            children: [
+                              BodySmall(statusLine),
+                              if (snapshot.hasData)
+                                BodySmall(
+                                  'Version ${snapshot.data!.version} (${snapshot.data!.buildNumber})',
+                                ),
+                            ],
+                          );
+                        },
+                      ),
                       IconButton(
                         // ignore: no-empty-block
                         onPressed: () {},
@@ -146,7 +168,7 @@ class _DeletableCharacterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 75.0),
+      padding: EdgeInsets.only(bottom: Platform.isIOS ? 75.0 : 50.0),
       child: Scrollbar(
         child: ListView.builder(
           itemCount: _data.length,
@@ -224,7 +246,7 @@ class _Footer extends StatelessWidget {
     return Positioned(
       bottom: 0,
       child: SizedBox(
-        height: 75.0,
+        height: Platform.isIOS ? 75.0 : 50.0,
         width: MediaQuery.of(context).size.width,
         child: Container(
           decoration: const BoxDecoration(

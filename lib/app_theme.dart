@@ -30,6 +30,10 @@ class AppTheme {
         ),
       ),
     ),
+    iconTheme: const IconThemeData(
+      color: Color(0xFF58180D),
+    ),
+
     /**
      * See https://m3.material.io/styles/typography/type-scale-tokens
      */

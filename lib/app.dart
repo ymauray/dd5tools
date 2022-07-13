@@ -1,8 +1,9 @@
+import 'package:dd5tools/providers/character_provider.dart';
+import 'package:dd5tools/utils/db_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'app_theme.dart';
-import 'models/characer.dart';
 import 'pages/home_page.dart';
 
 class App extends StatelessWidget {
@@ -12,15 +13,11 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<List<Character>>(
-          create: (_) => [
-            const Character("Kräal", tagline: "Paladin, deux, trois, ..."),
-            const Character("Valla Morigak"),
-            const Character(
-              "Yavana",
-              tagline: "Aubergiste, mais pas seulement.",
-            ),
-          ],
+        Provider<DbUtil>(
+          create: (_) => DbUtil(),
+        ),
+        ChangeNotifierProvider<CharacterProvider>(
+          create: (context) => CharacterProvider(context.read<DbUtil>()),
         ),
       ],
       child: MaterialApp(

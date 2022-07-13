@@ -4,19 +4,24 @@ import '../models/characer.dart';
 import 'typography/body_small.dart';
 import 'typography/title_medium.dart';
 
-class CharacterCard extends StatelessWidget {
-  const CharacterCard(Character character, {Key? key})
-      : _character = character,
+class CharacterCard extends StatefulWidget {
+  const CharacterCard(
+    Character character, {
+    Key? key,
+  })  : _character = character,
         super(key: key);
 
   final Character _character;
 
   @override
+  State<CharacterCard> createState() => _CharacterCardState();
+}
+
+class _CharacterCardState extends State<CharacterCard> {
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        //color: const Color(0xFFBBBBBB),
-        //backgroundBlendMode: BlendMode.colorBurn,
         image: const DecorationImage(
           image: AssetImage("assets/paper_small_bg.png"),
           fit: BoxFit.cover,
@@ -28,10 +33,10 @@ class CharacterCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(5.0),
       ),
       child: ListTile(
-        title: TitleMedium(_character.name),
-        subtitle: BodySmall(_character.tagline ?? ''),
+        title: TitleMedium(widget._character.name),
+        subtitle: BodySmall(widget._character.tagline ?? ''),
         onTap: () {
-          debugPrint("Hello, ${_character.name}");
+          debugPrint("Hello, ${widget._character.name}");
         },
       ),
     );

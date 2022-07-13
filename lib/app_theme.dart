@@ -23,7 +23,7 @@ class AppTheme {
         foregroundColor: MaterialStateProperty.all(Colors.black),
         textStyle: MaterialStateProperty.all(
           const TextStyle(
-            fontSize: 12 * _fontScale,
+            fontSize: 14 * _fontScale,
             fontWeight: FontWeight.w400,
             fontFamily: 'Bookinsanity (Remake)',
           ),

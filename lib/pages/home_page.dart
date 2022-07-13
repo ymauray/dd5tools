@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mes personnages'),
+        centerTitle: false,
         actions: [
           if (!_modify)
             TextButton(
@@ -68,7 +69,7 @@ class _HomePageState extends State<HomePage> {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 50.0),
+              padding: const EdgeInsets.only(bottom: 100.0),
               child: Scrollbar(
                 child: ListView.builder(
                   itemBuilder: (context, index) {
@@ -111,7 +112,7 @@ class _HomePageState extends State<HomePage> {
             Positioned(
               bottom: 0,
               child: SizedBox(
-                height: 50.0,
+                height: 100.0,
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   decoration: const BoxDecoration(
@@ -126,42 +127,46 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Column(
                     children: [
-                      if (!_modify) ...[
-                        const SizedBox(
-                          width: 48,
-                        ),
-                        const BodySmall(
-                          '3 personnages chargés',
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.add,
-                          ),
-                        ),
-                      ],
-                      if (_modify) ...[
-                        const SizedBox(
-                          width: 48,
-                        ),
-                        const SizedBox(
-                          width: 48,
-                        ),
-                        if (_deleteAll)
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text("Tout supprimer"),
-                          ),
-                        if (!_deleteAll)
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text("Supprimer"),
-                          ),
-                      ],
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          if (!_modify) ...[
+                            const SizedBox(
+                              width: 48,
+                            ),
+                            const BodySmall(
+                              '3 personnages chargés',
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.add,
+                              ),
+                            ),
+                          ],
+                          if (_modify) ...[
+                            const SizedBox(
+                              width: 48,
+                            ),
+                            const SizedBox(
+                              width: 48,
+                            ),
+                            if (_deleteAll)
+                              TextButton(
+                                onPressed: () {},
+                                child: const Text("Tout supprimer"),
+                              ),
+                            if (!_deleteAll)
+                              TextButton(
+                                onPressed: () {},
+                                child: const Text("Supprimer"),
+                              ),
+                          ],
+                        ],
+                      ),
                     ],
                   ),
                 ),

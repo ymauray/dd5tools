@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/characer.dart';
@@ -10,8 +11,8 @@ class DbUtil {
     var path = '$databasesPath/dd5tools.db';
 
     //if (kDebugMode) {
-    //  await deleteDatabase(path);
-    //  _database = null;
+      await deleteDatabase(path);
+      _database = null;
     //}
 
     _database ??= await openDatabase(path, version: 1, onUpgrade: _upgrade);
@@ -33,12 +34,12 @@ class DbUtil {
       for (var character in [
         Character(
           name: "Kräal",
-          tagline: "Paladin, deux, trois, ...",
+          tagline: "Paladin, deux, trois, quatre, ...",
         ),
-        Character(name: "Valla Morigak"),
+        Character(name: "Valla Morigak", tagline: "Elle est ou ? Pala(dine) !"),
         Character(
           name: "Yavana",
-          tagline: "Aubergiste, mais pas seulement.",
+          tagline: "Y'a du soleil et Yavana, dar la dir la dada...",
         ),
       ]) {
         await db.insert('characters', character.toMap());

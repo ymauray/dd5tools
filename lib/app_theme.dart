@@ -146,9 +146,10 @@ class AppTheme {
         fontFamily: 'Bookinsanity (Remake)',
       ),
       bodyMedium: TextStyle(
-        fontSize: 14 * _fontScale,
+        fontSize: .422 * _fontScaleCM,
         fontWeight: FontWeight.w400,
         fontFamily: 'Bookinsanity (Remake)',
+        color: Color(0xff222222),
       ),
       bodySmall: TextStyle(
         fontSize: .317 * _fontScaleCM,

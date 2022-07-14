@@ -4,11 +4,14 @@ import 'package:dd5tools/providers/character_provider.dart';
 import 'package:dd5tools/widgets/paper_container.dart';
 import 'package:dd5tools/widgets/typography/title_small.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../models/characer.dart';
 import '../widgets/character_card.dart';
+import '../widgets/typography/body_medium.dart';
 import '../widgets/typography/body_small.dart';
 
 class HomePage extends StatefulWidget {
@@ -78,7 +81,7 @@ class _HomePageState extends State<HomePage> {
           builder: (context, characterProvider, child) {
             return Stack(
               children: [
-                _DeletableCharacterCard(
+                _CharacterList(
                   _characters,
                   modify: _modify,
                   onDelete: (index) {
@@ -114,7 +117,17 @@ class _HomePageState extends State<HomePage> {
                       ),
                       IconButton(
                         // ignore: no-empty-block
-                        onPressed: () {},
+                        onPressed: () async {
+                          var character = await _newCharacter(context);
+                          if (character != null) {
+                            setState(() {
+                              _characters.add(character);
+                              _characters.sort((a, b) => a.name
+                                  .toUpperCase()
+                                  .compareTo(b.name.toUpperCase()));
+                            });
+                          }
+                        },
                         icon: const Icon(Icons.add),
                       ),
                     ],
@@ -150,8 +163,8 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class _DeletableCharacterCard extends StatelessWidget {
-  const _DeletableCharacterCard(
+class _CharacterList extends StatelessWidget {
+  const _CharacterList(
     List<Character> data, {
     Function(int index)? onDelete,
     Key? key,
@@ -215,16 +228,16 @@ Future<bool?> _confirmDelete(
     context: context,
     builder: (context) => AlertDialog(
       title: const TitleSmall('Supprimer'),
-      content: BodySmall(prompt),
+      content: BodyMedium(prompt),
       actions: [
         TextButton(
-          child: const BodySmall('Supprimer'),
+          child: const BodyMedium('Supprimer'),
           onPressed: () {
             Navigator.of(context).pop(true);
           },
         ),
         TextButton(
-          child: const BodySmall('Annuler'),
+          child: const BodyMedium('Annuler'),
           onPressed: () {
             Navigator.of(context).pop(false);
           },
@@ -232,6 +245,93 @@ Future<bool?> _confirmDelete(
       ],
     ),
   );
+}
+
+// ignore: long-method
+Future<Character?> _newCharacter(BuildContext context) async {
+  final formKey = GlobalKey<FormBuilderState>();
+
+  return showDialog<Character>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const TitleSmall('Nouveau personnage'),
+        content: FormBuilder(
+          key: formKey,
+          onChanged: () {
+            formKey.currentState!.save();
+            debugPrint(formKey.currentState!.value.toString());
+          },
+          autovalidateMode: AutovalidateMode.disabled,
+          initialValue: const {
+            'name': '',
+            'tagline': '',
+          },
+          skipDisabled: true,
+          child: const _NewCharacterForm(),
+        ),
+        actions: [
+          TextButton(
+            child: const BodyMedium('Ajouter'),
+            onPressed: () {
+              if (formKey.currentState?.saveAndValidate() ?? false) {
+                Navigator.of(context).pop(
+                  Character(
+                    name: formKey.currentState!.value['name'] as String,
+                    tagline: formKey.currentState!.value['tagline'] as String,
+                  ),
+                );
+                debugPrint(formKey.currentState?.value.toString());
+              } else {
+                debugPrint(formKey.currentState?.value.toString());
+                debugPrint('validation failed');
+              }
+            },
+          ),
+          TextButton(
+            child: const BodyMedium('Annuler'),
+            onPressed: () {
+              Navigator.of(context).pop(null);
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+class _NewCharacterForm extends StatelessWidget {
+  const _NewCharacterForm({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        FormBuilderTextField(
+          style: Theme.of(context).textTheme.bodyMedium,
+          name: 'name',
+          decoration: const InputDecoration(
+            labelText: 'Nom',
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+          ),
+          validator: FormBuilderValidators.required(),
+          textInputAction: TextInputAction.next,
+        ),
+        FormBuilderTextField(
+          style: Theme.of(context).textTheme.bodyMedium,
+          name: 'tagline',
+          decoration: const InputDecoration(
+            labelText: 'Sous-titre',
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+          ),
+          textInputAction: TextInputAction.next,
+        ),
+      ],
+    );
+  }
 }
 
 class _Footer extends StatelessWidget {

@@ -1,7 +1,7 @@
-import 'package:dd5tools/utils/db_util.dart';
 import 'package:flutter/widgets.dart';
 
 import '../models/characer.dart';
+import '../utils/db_util.dart';
 
 class CharacterProvider extends ChangeNotifier {
   CharacterProvider(DbUtil dbUtil) : _dbUtil = dbUtil;

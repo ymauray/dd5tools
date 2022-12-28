@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:dd5tools/providers/character_provider.dart';
-import 'package:dd5tools/widgets/paper_container.dart';
-import 'package:dd5tools/widgets/typography/title_small.dart';
+import 'package:dd5tools/paper_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -10,9 +8,11 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../models/characer.dart';
+import '../providers/character_provider.dart';
 import '../widgets/character_card.dart';
 import '../widgets/typography/body_medium.dart';
 import '../widgets/typography/body_small.dart';
+import '../widgets/typography/title_small.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

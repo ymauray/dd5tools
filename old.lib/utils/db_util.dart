@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/characer.dart';
@@ -11,8 +10,8 @@ class DbUtil {
     var path = '$databasesPath/dd5tools.db';
 
     //if (kDebugMode) {
-      await deleteDatabase(path);
-      _database = null;
+    await deleteDatabase(path);
+    _database = null;
     //}
 
     _database ??= await openDatabase(path, version: 1, onUpgrade: _upgrade);

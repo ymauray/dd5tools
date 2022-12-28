@@ -1,38 +1,33 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_builder_validators/localization/l10n.dart';
+import 'package:gettext_i18n/gettext_i18n.dart';
 
-import 'app_theme.dart';
-import 'pages/home_page.dart';
-import 'providers/character_provider.dart';
-import 'utils/db_util.dart';
+import 'main_layout.dart';
 
-class App extends StatelessWidget {
+class App extends ConsumerWidget {
   const App({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider<DbUtil>(
-          create: (_) => DbUtil(),
-        ),
-        ChangeNotifierProvider<CharacterProvider>(
-          create: (context) => CharacterProvider(context.read<DbUtil>()),
-        ),
+  Widget build(context, ref) {
+    return CupertinoApp(
+      title: 'dnd assistant',
+      debugShowCheckedModeBanner: false,
+      //theme: AppTheme.light.data,
+      //darkTheme: AppTheme.dark.data,
+      home: const MainLayout(),
+      supportedLocales: const [
+        Locale('en'),
+        Locale('fr'),
       ],
-      child: MaterialApp(
-        title: 'DD5Tools',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.themeData,
-        home: const HomePage(),
-        localizationsDelegates: const [
-          FormBuilderLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-      ),
+      localizationsDelegates: [
+        FormBuilderLocalizations.delegate,
+        GettextLocalizationsDelegate(defaultLanguage: 'fr'),
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
     );
   }
 }

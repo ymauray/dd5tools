@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  flutter_launcher_icons: ^0.9.3
   provider: ^6.0.3
   flutter_bloc: ^8.0.1
   sqflite: ^2.0.3
@@ -20,17 +19,22 @@ dependencies:
   intl: ^0.17.0
   flutter_localizations:
     sdk: flutter
+  appwrite: ^6.0.0
+  flutter_riverpod: ^1.0.4
+  gettext_i18n: ^1.0.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
   dart_code_metrics: ^4.16.0
+  flutter_launcher_icons: ^0.10.0
 
 flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/i18n/
   fonts:
     - family: Bookinsanity (Remake)
       fonts:

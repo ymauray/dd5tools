@@ -1,162 +1,74 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  //static const _fontScale = 1.25;
-  static const _fontScale = 1.25;
-  static const _fontScaleCM = 35 * _fontScale;
+  const AppTheme._(this.name, this.data);
 
-  static var themeData = ThemeData(
-    primarySwatch: Colors.red,
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-    appBarTheme: const AppBarTheme(
-      color: Colors.red,
-      elevation: 0,
-      foregroundColor: Colors.white,
-      titleTextStyle: TextStyle(
-        fontSize: .705 * _fontScaleCM,
+  final String name;
+  final ThemeData data;
+
+  static AppTheme get light => AppTheme._('light', _buildLightTheme());
+  static AppTheme get dark => AppTheme._('dark', _buildDarkTheme());
+
+  static ThemeData _buildLightTheme() {
+    return ThemeData(
+      primarySwatch: Colors.purple,
+      brightness: Brightness.light,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      appBarTheme: const AppBarTheme(
+        elevation: 0,
+      ),
+      primaryTextTheme: _buildPrimaryTextTheme(),
+      textTheme: _buildPrimaryTextTheme(),
+    );
+  }
+
+  static ThemeData _buildDarkTheme() {
+    return ThemeData(
+      primarySwatch: Colors.blue,
+      brightness: Brightness.dark,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+    );
+  }
+
+  static TextStyle _heading(
+    double fontSize,
+    FontWeight fontWeight,
+  ) =>
+      TextStyle(
         fontFamily: 'Mr Eaves Small Caps (Remake)',
-        fontWeight: FontWeight.normal,
-      ),
-    ),
-    textButtonTheme: TextButtonThemeData(
-      style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all(Colors.black),
-        textStyle: MaterialStateProperty.all(
-          const TextStyle(
-            fontSize: 14 * _fontScale,
-            fontWeight: FontWeight.w400,
-            fontFamily: 'Bookinsanity (Remake)',
-          ),
-        ),
-      ),
-    ),
-    iconTheme: const IconThemeData(
-      color: Color(0xFF58180D),
-    ),
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+      );
 
-    /**
-     * See https://m3.material.io/styles/typography/type-scale-tokens
-     */
-    textTheme: const TextTheme(
-      /**
-       * ------------------------------------------------------------
-       * Display
-       * ------------------------------------------------------------
-       */
-      displayLarge: TextStyle(
-        fontSize: 57 * _fontScale,
-        fontWeight: FontWeight.w400,
+  static TextStyle _body(
+    double fontSize,
+    FontWeight fontWeight,
+  ) =>
+      TextStyle(
         fontFamily: 'Bookinsanity (Remake)',
-      ),
-      displayMedium: TextStyle(
-        fontSize: 45 * _fontScale,
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Bookinsanity (Remake)',
-      ),
-      displaySmall: TextStyle(
-        fontSize: 36 * _fontScale,
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Bookinsanity (Remake)',
-      ),
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+      );
 
-      /**
-       * ------------------------------------------------------------
-       * Headline
-       * ------------------------------------------------------------
-       */
-
-      headlineLarge: TextStyle(
-        fontSize: 32 * _fontScale,
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Bookinsanity (Remake)',
-      ),
-      headlineMedium: TextStyle(
-        fontSize: 28 * _fontScale,
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Bookinsanity (Remake)',
-      ),
-      headlineSmall: TextStyle(
-        fontSize: 24 * _fontScale,
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Bookinsanity (Remake)',
-      ),
-
-      /**
-       * ------------------------------------------------------------
-       * Title
-       * ------------------------------------------------------------
-       */
-
-      titleLarge: TextStyle(
-        fontSize: .987 * _fontScaleCM,
-        fontFamily: 'Mr Eaves Small Caps (Remake)',
-        fontWeight: FontWeight.w800,
-        color: Color(0xFF58180D),
-      ),
-      titleMedium: TextStyle(
-        fontSize: .705 * _fontScaleCM,
-        fontFamily: 'Mr Eaves Small Caps (Remake)',
-        fontWeight: FontWeight.w800,
-        color: Color(0xFF58180D),
-      ),
-      titleSmall: TextStyle(
-        fontSize: .529 * _fontScaleCM,
-        fontFamily: 'Mr Eaves Small Caps (Remake)',
-        fontWeight: FontWeight.w800,
-        color: Color(0xFF58180D),
-      ),
-
-      /**
-       * ------------------------------------------------------------
-       * Label 
-       * ------------------------------------------------------------
-       */
-
-      labelLarge: TextStyle(
-        //fontSize: 20,
-        fontSize: 14 * _fontScale,
-        fontFamily: 'Mr Eaves Small Caps (Remake)',
-        fontWeight: FontWeight.w500,
-        //color: Colors.white,
-      ),
-      labelMedium: TextStyle(
-        //fontSize: 20,
-        fontSize: 12 * _fontScale,
-        fontFamily: 'Mr Eaves Small Caps (Remake)',
-        fontWeight: FontWeight.w500,
-        //color: Colors.white,
-      ),
-      labelSmall: TextStyle(
-        //fontSize: 20,
-        fontSize: 11 * _fontScale,
-        fontFamily: 'Mr Eaves Small Caps (Remake)',
-        fontWeight: FontWeight.w500,
-        //color: Colors.white,
-      ),
-
-      /**
-       * ------------------------------------------------------------
-       * Body 
-       * ------------------------------------------------------------
-       */
-
-      bodyLarge: TextStyle(
-        fontSize: 16 * _fontScale,
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Bookinsanity (Remake)',
-      ),
-      bodyMedium: TextStyle(
-        fontSize: .422 * _fontScaleCM,
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Bookinsanity (Remake)',
-        color: Color(0xff222222),
-      ),
-      bodySmall: TextStyle(
-        fontSize: .317 * _fontScaleCM,
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Bookinsanity (Remake)',
-        color: Color(0xff222222),
-      ),
-    ),
-  );
+  static TextTheme _buildPrimaryTextTheme() {
+    return TextTheme(
+      displayLarge: _heading(57, FontWeight.w400),
+      displayMedium: _heading(45, FontWeight.w400),
+      displaySmall: _heading(36, FontWeight.w400),
+      headlineLarge: _heading(32, FontWeight.w400),
+      headlineMedium: _heading(28, FontWeight.w400),
+      headlineSmall: _heading(24, FontWeight.w400),
+      titleLarge: _heading(22, FontWeight.w400),
+      titleMedium: _body(16, FontWeight.w500),
+      titleSmall: _body(14, FontWeight.w500),
+      labelLarge: _body(14, FontWeight.w500),
+      labelMedium: _body(12, FontWeight.w500),
+      labelSmall: _body(11, FontWeight.w500),
+      bodyLarge: _body(16, FontWeight.w400),
+      bodyMedium: _body(14, FontWeight.w400),
+      bodySmall: _body(12, FontWeight.w400),
+    ).apply(
+      bodyColor: Colors.black,
+    );
+  }
 }
